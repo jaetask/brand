@@ -75,14 +75,6 @@ function BrandSections({ brand, path }: { brand: Brand; path: string }) {
           />
         ))}
       </SideSection>
-      <SideSection label="Brand setup">
-        <SideLink
-          href={`${base}/seasons`}
-          label="Seasons"
-          line="90 days at a time"
-          current={at("seasons")}
-        />
-      </SideSection>
     </>
   );
 }

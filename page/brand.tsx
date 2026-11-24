@@ -581,7 +581,11 @@ function OverviewView({ d }: { d: Detail }) {
       title="Overview"
       line={`${d.brand.name}'s plan: hoeem's five steps, one season at a time.`}
     >
-      <Panel id="season" title="This season">
+      <Panel
+        id="season"
+        title="This season"
+        action={<PageLink to={`${base(d)}/seasons`}>All seasons</PageLink>}
+      >
         <SeasonHeader d={d} />
       </Panel>
       <Panel id="steps" title="Your five steps" line={`${done} of 5 done.`}>

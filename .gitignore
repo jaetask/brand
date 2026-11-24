@@ -1,0 +1,16 @@
+node_modules
+dist
+*.tsbuildinfo
+.DS_Store
+.env
+.env.*
+!.env.example
+public/
+
+# Brand is open source: brand data never leaves this machine.
+data/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+pglite/

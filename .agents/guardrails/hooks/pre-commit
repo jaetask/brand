@@ -1,0 +1,14 @@
+#!/bin/sh
+# guardrails: only jaetask commits here, and brand data is never committed.
+set -e
+email=$(git config user.email || true)
+if [ "$email" != "786388+jaetask@users.noreply.github.com" ]; then
+  echo "Refused: commits to Brand are made as jaetask (git config user.email is '$email')." >&2
+  exit 1
+fi
+bad=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '(^|/)data/|\.(db|sqlite|sqlite3)(-[a-z]+)?$|(^|/)pglite/|(^|/)\.env($|\.)' | grep -v '^\.env\.example$' || true)
+if [ -n "$bad" ]; then
+  echo "Refused: Brand is open source and these look like data or secrets:" >&2
+  echo "$bad" >&2
+  exit 1
+fi

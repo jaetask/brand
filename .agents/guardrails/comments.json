@@ -1,0 +1,4 @@
+{
+  "skip": [".agents/skills/", ".claude/", ".github/"],
+  "files": {}
+}

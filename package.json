@@ -1,0 +1,57 @@
+{
+  "name": "brand",
+  "version": "0.1.0",
+  "description": "Define and maintain many brands in one place: profile, beliefs, voice and look, and the plan each brand runs by.",
+  "author": "jaetask",
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://github.com/jaetask/brand#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaetask/brand.git"
+  },
+  "bugs": "https://github.com/jaetask/brand/issues",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/build-page.mjs",
+    "build:page": "node scripts/build-page.mjs",
+    "typecheck": "tsc --noEmit && tsc -p page",
+    "test": "tsx --test src/*.test.ts src/*/*.test.ts",
+    "lint": "biome lint . && npm run check:docs && npm run check:toolkit && npm run check:data && node .agents/guardrails/check-comments.mjs",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "prepare": "git config core.hooksPath .agents/guardrails/hooks || true",
+    "check:docs": "node scripts/check-docs.mjs",
+    "check:toolkit": "toolkit-guard page",
+    "check:data": "node scripts/check-data.mjs",
+    "start": "node dist/main.js",
+    "dev": "node scripts/build-page.mjs && tsx src/main.ts",
+    "migrate:marketing": "tsx scripts/migrate-from-marketing.ts"
+  },
+  "dependencies": {
+    "@jaetask/open-agent-kit": "0.2.1",
+    "@modelcontextprotocol/client": "2.4.0",
+    "@modelcontextprotocol/server": "2.4.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.5",
+    "@electric-sql/pglite": "0.5.14",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@jaetask/toolkit": "git+https://github.com/jaetask/toolkit.git#0015e89758a211a9af331cd0d22be480154e79fe",
+    "@tabler/icons-react": "^3.44.0",
+    "@tailwindcss/cli": "^4.3.5",
+    "@types/node": "22.18.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "esbuild": "0.28.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "tailwindcss": "^4.3.5",
+    "tsx": "4.20.5",
+    "typescript": "5.9.2"
+  }
+}

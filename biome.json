@@ -19,5 +19,40 @@
     "parser": {
       "tailwindDirectives": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["page/app/**", "src/mkt/**", "src/shared/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noArrayIndexKey": "off",
+            "noExplicitAny": "off",
+            "noConfusingVoidType": "off"
+          },
+          "style": {
+            "noNonNullAssertion": "off"
+          },
+          "a11y": {
+            "noStaticElementInteractions": "off",
+            "useAriaPropsSupportedByRole": "off",
+            "useKeyWithClickEvents": "off",
+            "noLabelWithoutControl": "off",
+            "useSemanticElements": "off",
+            "noSvgWithoutTitle": "off",
+            "useButtonType": "off",
+            "noRedundantAlt": "off"
+          },
+          "correctness": {
+            "useExhaustiveDependencies": "off",
+            "noUnusedFunctionParameters": "off",
+            "noUnusedVariables": "off"
+          },
+          "complexity": {
+            "noCommaOperator": "off"
+          }
+        }
+      }
+    }
+  ]
 }

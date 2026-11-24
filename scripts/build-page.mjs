@@ -5,7 +5,7 @@ import { build } from "esbuild";
 const at = (path) => fileURLToPath(new URL(path, import.meta.url));
 
 await build({
-  entryPoints: { app: at("../page/main.tsx"), fonts: at("../page/fonts.css") },
+  entryPoints: { app: at("../page/shell/main.tsx"), fonts: at("../page/fonts.css") },
   outdir: at("../public"),
   assetNames: "[name]",
   bundle: true,
@@ -16,6 +16,11 @@ await build({
   target: "es2022",
   jsx: "automatic",
   loader: { ".woff2": "file" },
+  alias: {
+    "@": at("../page/app"),
+    "@shared": at("../src/shared"),
+    "@shims": at("../page/shims"),
+  },
   define: { "import.meta.env": '{"SSR":false,"MODE":"production","DEV":false}' },
   logLevel: "warning",
 });

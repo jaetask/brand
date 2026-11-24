@@ -8,7 +8,9 @@ const dataDir = env.DATA_DIR ?? "data";
 mkdirSync(dataDir, { recursive: true });
 
 const app = await createBrand({
-  file: join(dataDir, "brand.db"),
+  file: join(dataDir, "app.db"),
+  brands: join(dataDir, "pglite"),
+  images: join(dataDir, "brand-plan-images"),
   connect: (env.KIT_CONNECT ?? "").split(",").filter(Boolean),
   page: fileURLToPath(new URL("../public", import.meta.url)),
   skill: fileURLToPath(new URL("../skills/brand/SKILL.md", import.meta.url)),

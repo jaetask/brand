@@ -2,19 +2,22 @@ import { randomBytes } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { createServer, type Server } from "node:http";
 import type { AddressInfo } from "node:net";
-import type { DatabaseSync } from "node:sqlite";
+import { join } from "node:path";
+import { PGlite } from "@electric-sql/pglite";
 import { provide } from "@jaetask/open-agent-kit";
 import { type App, createApp } from "@jaetask/open-agent-kit/app";
 import { nodeListener } from "@jaetask/open-agent-kit/mcp";
-import { brandDomain } from "./brand/domain.js";
-import { OWNER } from "./brand/model.js";
-import { sqliteBrands } from "./brand/store.js";
+import { brandDomain } from "./mkt/domain.js";
+import { bindDatabase } from "./mkt/host.js";
+import { BRAND_SCHEMA } from "./mkt/schema.js";
 import { VERSION } from "./version.js";
 
 export type BrandOptions = {
   file: string;
+  brands: string;
   page?: string;
   skill?: string;
+  images?: string;
   connect?: string[];
   log?: (line: string) => void;
   now?: () => number;
@@ -50,20 +53,28 @@ async function ownerCookie(
   return (answer.headers.get("set-cookie") ?? "").split(";")[0] ?? "";
 }
 
-export const domains = (now: () => number = Date.now) => [
-  provide(brandDomain, (db: DatabaseSync) => ({ brands: sqliteBrands(db, now) })),
-];
+export const OWNER = "owner";
+
+export const domains = () => [provide(brandDomain, () => ({}))];
+
+export async function openBrands(dir: string): Promise<PGlite> {
+  const pg = await PGlite.create(dir);
+  await pg.exec(BRAND_SCHEMA);
+  bindDatabase(pg);
+  return pg;
+}
 
 export type BrandApp = App;
 
 export async function createBrand(options: BrandOptions): Promise<BrandApp> {
   const now = options.now ?? Date.now;
+  const pg = await openBrands(options.brands);
   const setupSecret = randomBytes(24).toString("base64url");
   const app = await createApp({
     name: "brand",
     version: VERSION,
     file: options.file,
-    domains: domains(now),
+    domains: domains(),
     owner: { id: OWNER },
     now,
     setupSecret,
@@ -83,6 +94,16 @@ export async function createBrand(options: BrandOptions): Promise<BrandApp> {
       return new Response(await readFile(options.skill), {
         headers: { "content-type": "text/markdown; charset=utf-8", "cache-control": "no-cache" },
       });
+    }
+    const image = /^\/brand-plan\/images\/([a-z0-9-]+\.png)$/.exec(pathname)?.[1];
+    if (image && options.images) {
+      try {
+        return new Response(await readFile(join(options.images, image)), {
+          headers: { "content-type": "image/png", "cache-control": "max-age=3600" },
+        });
+      } catch {
+        return new Response("Not found.", { status: 404 });
+      }
     }
     if (pathname === "/api/session" || pathname === "/api/sessions") {
       return Response.json({ error: "Not found." }, { status: 404 });
@@ -104,6 +125,7 @@ export async function createBrand(options: BrandOptions): Promise<BrandApp> {
         await new Promise((resolve) => http?.close(resolve));
       }
       await app.close();
+      await pg.close();
     },
   };
 }

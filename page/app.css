@@ -1,3 +1,4 @@
 @import "tailwindcss";
 @import "@jaetask/toolkit/styles.css";
+@import "./app/palette.css";
 @source "./**/*.{ts,tsx}";

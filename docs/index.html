@@ -131,13 +131,13 @@ footer{padding-block:40px 64px;color:var(--muted);font-size:.9rem;border-top:1px
   <h2>The same brand, over MCP</h2>
   <p class="prose">Every change in Brand is an Action, served to the page and to agents alike. To connect an agent, ask from a terminal and approve it on the Connections page:</p>
   <pre>npm run connect -- "Claude Code"</pre>
-  <p class="prose">It prints the MCP endpoint and a key once. Agents read <code>/skill.md</code> for how to use Brand: read a brand with <code>brand__brand-read</code> before writing in its voice, and save plan steps with <code>brand__guidance-save</code>.</p>
+  <p class="prose">It prints the MCP endpoint and a key once. Agents read <code>/skill.md</code> for how to use Brand: read a brand with <code>brand__get-entity</code> before writing in its voice, and save plan steps with <code>brand__save-plan-level</code>.</p>
 </section>
 
 <section id="data" class="stack">
   <span class="eyebrow">Your data</span>
   <h2>Brand is open source; your brands are not</h2>
-  <p class="prose">Everything a brand holds lives in <code>data/brand.db</code> on your computer. Git ignores <code>data/</code>, and the pre-commit hook and <code>npm run check:data</code> refuse database files and <code>.env</code>. Brand answers only requests from the same computer.</p>
+  <p class="prose">Everything a brand holds lives in <code>data/pglite</code> on your computer. Git ignores <code>data/</code>, and the pre-commit hook and <code>npm run check:data</code> refuse database files and <code>.env</code>. Brand answers only requests from the same computer.</p>
 </section>
 
 <section id="run" class="stack">

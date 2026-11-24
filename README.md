@@ -27,7 +27,7 @@ npm run build
 npm start
 ```
 
-Brand runs at http://127.0.0.1:8093 and keeps its data in `data/brand.db`. It answers only requests from this computer, and agents connect over MCP at `/mcp`. Set `PORT`, `HOST` and `DATA_DIR` to change the defaults.
+Brand runs at http://127.0.0.1:8093 and keeps its data in `data/pglite`. It answers only requests from this computer, and agents connect over MCP at `/mcp`. Set `PORT`, `HOST` and `DATA_DIR` to change the defaults.
 
 ## Bring brands over from Marketing
 
@@ -35,7 +35,7 @@ Brand runs at http://127.0.0.1:8093 and keeps its data in `data/brand.db`. It an
 npm run migrate:marketing -- --from <a backup copy of Marketing's data/pglite>
 ```
 
-It copies every brand, its guidance versions, lines, proof, channels, accounts, peers, seasons and history into a new `data/brand.db`. It reads from a temporary copy of the backup, refuses Marketing's live database, never writes over an existing `data/brand.db`, and checks each table's count.
+It copies every brand, its guidance versions, lines, proof, channels, accounts, peers, seasons and history into a new `data/pglite`. It reads from a temporary copy of the backup, refuses Marketing's live database, never writes over an existing `data/pglite`, and checks each table's count.
 
 ## Your data stays yours
 

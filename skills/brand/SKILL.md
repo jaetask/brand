@@ -1,7 +1,7 @@
 ---
 
 name: brand
-description: Use when working with a brand's profile, lines, voice and look, or hoeem's five-step plan in the Brand app (proof, your person, association, product, belt, seasons). Read a brand with brand__brand-read before writing anything in its voice.
+description: Use when working with a brand's profile, lines, voice and look, or hoeem's five-step plan in the Brand app (proof, your person, association, product, belt, seasons). Read a brand with brand__get-entity before writing anything in its voice.
 ---
 
 # Brand
@@ -14,28 +14,30 @@ Every brand runs by hoeem's "I want to turn my X account into income (full cours
 
 ## Read first
 
-- `brand__brand-list`: the brands, in sidebar order.
-- `brand__brand-read`: one brand in full. `guidance` holds the voice, look, principles, conduct, audience promise and the plan. `plan.levels` says which step is done, partial or empty, and what is missing.
+- `brand__get-owner`: the owner's actor id. Every write takes `by` (your own actor id, such as `claude`) and a fresh `requestId`.
+- `brand__list-entities`: the brands, in sidebar order.
+- `brand__get-entity`: one brand in full. `guidance` holds the voice, look, principles, conduct, audience promise and the plan. `plan.levels` says which step is done, partial or empty, and what is missing.
+- `brand__get-plan`: the five steps with their fields, what is missing, the next item and the season. It gives the `entity.version` that saves need.
 
-Before drafting anything for a brand, read its voice (`guidance.voice`, `guidance.verbalStyle`), its accepted lines (`identity` with status `accepted`) and its principles. Credit every borrowed phrase.
+Before drafting anything for a brand, read its voice (`guidance.voice`, `guidance.verbalStyle`), its accepted lines (`brand__list-identity-statements`) and its principles. Credit every borrowed phrase.
 
 ## The five steps
 
-1. **Proof** (`plan.proof.path`, A or B, and `proof`): an entry counts when it is firsthand and has a `proofUrl` anyone can open. Add with `brand__proof-add`.
+1. **Proof** (`plan.proof.path`, A or B, and `proof`): an entry counts when it is firsthand and has a `proofUrl` anyone can open. Add with `brand__save-knowledge`.
 2. **Your person** (`plan.person`): who, their pain, what they pay for, and the four tests scored 1 to 10 with a note.
 3. **Association** (`plan.association`): 5 themes with a post idea, 3 Anti-Brand items with our standard, 2 or 3 visual constants, and the verbal style.
 4. **Product** (`plan.product.freeProducts`): the free thing, its hook, and its release gates. It delivers when every gate is ticked.
 5. **Belt** (`plan.belt`): the public project, its exact promise, target, launch date, where the deadline shows, the delay plan and the weekly check-in day.
 
-Save any of these with `brand__guidance-save`, giving each changed step whole (for example `plan: { person: {...} }`) and a short `note`. Every save is a new version; nothing is overwritten.
+Save a step with `brand__save-plan-level`: `entityId`, `expectedVersion` (from `brand__get-plan`), `level`, the changed `values`, a short `note`, `by` and `requestId`. Every save is a new version; nothing is overwritten.
 
 ## Lines
 
-`brand__identity-add` adds a line as suggested. Only the owner accepts, rejects or retires lines (`brand__identity-status-set`). Give the credit when the idea is someone else's.
+`brand__suggest-identity-statement` suggests a line. Only the owner accepts or rejects lines. Give the credit when the idea is someone else's.
 
 ## Seasons
 
-90 days each: `brand__season-save` sets dates, goal, path, target and proof needed; `brand__season-idea-save` keeps an idea for a later season.
+90 days each: `brand__list-seasons`, `brand__save-season` and `brand__create-season` set dates, goal, path, target and proof needed; `brand__save-season-idea` keeps an idea for a later season.
 
 ## Rules
 

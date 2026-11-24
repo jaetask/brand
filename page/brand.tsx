@@ -29,7 +29,7 @@ import {
 import { BrandMark } from "./brands.js";
 import { EditPage } from "./edit.js";
 import { act, NothingYet, day, Empty, Label, Muted, Pill, Text, when } from "./look.js";
-import { currentSeason, seasonDay, SEASON_BANDS, today } from "./season.js";
+import { addDays, checkIns, currentSeason, seasonDay, SEASON_BANDS, today } from "./season.js";
 
 export const HOEEM = "https://x.com/hooeem/status/2120955142438834287";
 
@@ -561,7 +561,8 @@ function SeasonHeader({ d }: { d: Detail }) {
             <div key={band.label} className={`grid rounded-lg border p-3 ${now ? "bg-muted" : ""}`}>
               <span className="text-sm font-medium">{band.label}</span>
               <small className="text-muted-foreground">
-                Days {band.from}–{band.to}
+                Days {band.from}–{band.to} · {day(addDays(s.start, band.from - 1))} –{" "}
+                {day(addDays(s.start, Math.min(band.to, st.length) - 1))}
                 {now ? " · today" : ""}
               </small>
             </div>
@@ -1177,6 +1178,28 @@ function BeltStep({ d }: { d: Detail }) {
           </ListCard>
         ) : (
           <Empty>Nothing listed yet.</Empty>
+        )}
+      </Panel>
+      <Panel
+        id="check-ins"
+        title="Weekly check-in"
+        line={
+          s && b.checkInDay
+            ? `Every ${b.checkInDay} · ${checkIns(s, b.checkInDay).length} check-ins this season`
+            : "No check-in day yet."
+        }
+        action={e("belt")}
+      >
+        {s && b.checkInDay ? (
+          <div className="flex flex-wrap gap-2">
+            {checkIns(s, b.checkInDay).map((c) => (
+              <Pill key={c} tone={c < today() ? "done" : undefined}>
+                {day(c)}
+              </Pill>
+            ))}
+          </div>
+        ) : (
+          <Empty>Set a weekly check-in day on the belt.</Empty>
         )}
       </Panel>
       <Panel id="promise" title="The promise" action={e("belt")}>

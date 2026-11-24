@@ -11,6 +11,7 @@ const app = await createBrand({
   file: join(dataDir, "brand.db"),
   connect: (env.KIT_CONNECT ?? "").split(",").filter(Boolean),
   page: fileURLToPath(new URL("../public", import.meta.url)),
+  skill: fileURLToPath(new URL("../skills/brand/SKILL.md", import.meta.url)),
 });
 
 const url = await app.listen(Number(env.PORT ?? 8093), env.HOST ?? "127.0.0.1");

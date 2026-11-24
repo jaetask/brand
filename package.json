@@ -29,7 +29,8 @@
     "check:data": "node scripts/check-data.mjs",
     "start": "node dist/main.js",
     "dev": "node scripts/build-page.mjs && tsx src/main.ts",
-    "migrate:marketing": "tsx scripts/migrate-from-marketing.ts"
+    "migrate:marketing": "tsx scripts/migrate-from-marketing.ts",
+    "connect": "node scripts/connect.mjs"
   },
   "dependencies": {
     "@jaetask/open-agent-kit": "0.2.1",

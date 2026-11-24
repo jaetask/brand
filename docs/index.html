@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand · User guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f5f6f8; --panel:#ffffff; --sunk:#eceef2; --ink:#161b24; --muted:#5a6372; --line:#d8dce3;
+  --accent:#2f5bd3; --accent-soft:#e5ebfb; --ok:#1f7a4d; --ok-soft:#e2f2ea; --part:#9a5b12; --part-soft:#f8ecdc;
+  --display:"Fraunces", Georgia, serif;
+  --body:"IBM Plex Sans", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#10141b; --panel:#171d26; --sunk:#1f2632; --ink:#e7eaf0; --muted:#9aa4b3; --line:#2a3340;
+  --accent:#8aa8ff; --accent-soft:#1c2846; --ok:#6fd39f; --ok-soft:#14301f; --part:#f0b46b; --part-soft:#36261a; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body)}
+a{color:var(--accent)}
+code{font-family:var(--mono);font-size:.88em;background:var(--sunk);padding:.08em .35em;border-radius:4px}
+pre{font-family:var(--mono);font-size:.88em;background:var(--sunk);padding:14px 16px;border-radius:8px;overflow-x:auto;margin:0}
+.wrap{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.prose{max-width:66ch}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0;font-weight:600}
+h1{font-size:clamp(2.1rem,5vw,3rem)}
+h2{font-size:clamp(1.45rem,3vw,1.9rem)}
+h3{font-size:1.1rem}
+p{margin:0}
+.eyebrow{font:500 .74rem var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.stack{display:flex;flex-direction:column;gap:14px}
+header{padding-block:56px 28px}
+section{padding-block:44px;border-top:1px solid var(--line)}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+nav.toc a{font-size:.9rem;text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:4px 12px;border-radius:999px;color:var(--ink)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.step{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--panel);font:600 .9rem var(--mono)}
+.step h3{margin-bottom:4px}
+.step p{color:var(--muted)}
+.done{font:500 .78rem var(--mono);color:var(--muted);margin-top:6px}
+.band{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:640px){.band{grid-template-columns:1fr}}
+.band div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.band b{display:block}
+.band small{color:var(--muted);font-family:var(--mono)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.card h3{margin-bottom:6px}
+.card p{color:var(--muted)}
+.states{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font:500 .78rem var(--mono);padding:3px 10px;border-radius:999px;border:1px solid var(--line)}
+.pill.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.pill.part{background:var(--part-soft);color:var(--part);border-color:transparent}
+footer{padding-block:40px 64px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="stack">
+  <span class="eyebrow">Brand · user guide</span>
+  <h1>Define and maintain many brands in one place</h1>
+  <p class="prose">Brand holds everything that makes a brand itself: who it is, what it believes, how it sounds and looks, and the plan it runs by. Your agents read the same brand over MCP, so every draft, page and post starts from it.</p>
+  <nav class="toc" aria-label="On this page">
+    <a href="#brands">Brands</a><a href="#profile">Profile</a><a href="#lines">Lines</a><a href="#voice">Voice and look</a><a href="#plan">The plan</a><a href="#seasons">Seasons</a><a href="#agents">Agents</a><a href="#data">Your data</a><a href="#run">Run it</a>
+  </nav>
+</header>
+
+<section id="brands" class="stack">
+  <span class="eyebrow">Brands</span>
+  <h2>One sidebar, every brand</h2>
+  <p class="prose">Each brand sits in the sidebar with its picture, or an icon and colour. Open one and its pages appear under it: Profile, What you believe, Voice and look, the plan's Overview and five steps, Seasons and History. All brands lists them in order, with arrows to move one up or down. Archive takes a brand out of the sidebar and keeps everything; Restore brings it back.</p>
+</section>
+
+<section id="profile" class="stack">
+  <span class="eyebrow">Profile</span>
+  <h2>Who you are, and where you post</h2>
+  <p class="prose">The profile holds the brand's name, picture, purpose, goals and intended audiences. Below it are the channels the brand posts on, the accounts on each channel with their persona, and the peers each account learns from.</p>
+</section>
+
+<section id="lines" class="stack">
+  <span class="eyebrow">What you believe</span>
+  <h2>Lines that define your character</h2>
+  <p class="prose">A line is a short, quotable sentence, with credit when the idea is someone else's, the thought behind it and the themes it supports. Agents suggest lines; only you accept, reject or retire them. Every change to a line is kept.</p>
+  <div class="states"><span class="pill">suggested</span><span class="pill ok">accepted</span><span class="pill">rejected</span><span class="pill">retired</span></div>
+</section>
+
+<section id="voice" class="stack">
+  <span class="eyebrow">Voice and look</span>
+  <h2>How you sound, what you stand by, how you look</h2>
+  <div class="grid2">
+    <div class="card"><h3>Voice</h3><p>Key phrases, borrowed phrases with their credit, tone rules, an example in your words, and the verbal style.</p></div>
+    <div class="card"><h3>Audience promise</h3><p>What your audience can count on from you.</p></div>
+    <div class="card"><h3>Principles and conduct</h3><p>The rules every post keeps. A new brand starts with five.</p></div>
+    <div class="card"><h3>Look</h3><p>Colours, typography and logos, next to the visual constants from step 3.</p></div>
+  </div>
+  <p class="prose">Every save of voice, look or plan is a new numbered version. History lists them all.</p>
+</section>
+
+<section id="plan" class="stack">
+  <span class="eyebrow">The plan</span>
+  <h2>hoeem's five steps</h2>
+  <p class="prose">Every brand runs by the method in hoeem's <a href="https://x.com/hooeem/status/2120955142438834287">"I want to turn my X account into income"</a>. Each step has a "Done when" list; a step is done when every check passes, partial when some do.</p>
+  <div class="states"><span class="pill ok">done</span><span class="pill part">partial</span><span class="pill">not started</span></div>
+  <ol class="steps">
+    <li class="step"><span class="n">1</span><div><h3>Proof</h3><p>Without proof, everything after is opinion. Choose path A (results you already have) or B (a 30-day volume sprint to earn them). Proof counts when it is firsthand and has a link anyone can open.</p><p class="done">Done when: a path is chosen, and the season's proof links are in place.</p></div></li>
+    <li class="step"><span class="n">2</span><div><h3>Your person</h3><p>Who it's for, their pain and what they already pay for, scored on four tests: growing market, acute pain, purchasing power and algorithmic clarity. The funnel narrows from everyone to your person.</p><p class="done">Done when: who, pain and pays-for are written, all four tests are scored 1 to 10, and audiences and the audience promise are set.</p></div></li>
+    <li class="step"><span class="n">3</span><div><h3>Association</h3><p>What people learn to expect through repetition: your themes, what you stand against, your visual constants and your verbal style.</p><p class="done">Done when: 5 themes with a post idea, 3 things you stand against with your standard, 2 or 3 visual constants, and a verbal style.</p></div></li>
+    <li class="step"><span class="n">4</span><div><h3>Product</h3><p>Marketing says what you promise; the free thing proves it. Each free product has a hook, a link and release gates.</p><p class="done">Done when: a free product has its hook, and it delivers on it.</p></div></li>
+    <li class="step"><span class="n">5</span><div><h3>Belt</h3><p>A public project with a result, a date and visible progress, so people come back every week.</p><p class="done">Done when: project, exact promise, target number, launch date, where the deadline shows, the delay plan and a weekly check-in day.</p></div></li>
+  </ol>
+  <p class="prose">The Overview shows the season, today's day of 90, the goal, the path, all five steps and the next thing to do.</p>
+</section>
+
+<section id="seasons" class="stack">
+  <span class="eyebrow">Seasons</span>
+  <h2>90 days at a time</h2>
+  <div class="band">
+    <div><b>Proof sprint</b><small>Days 1–30</small></div>
+    <div><b>Your person + Association</b><small>Days 31–60</small></div>
+    <div><b>Product + Belt</b><small>Days 61–90</small></div>
+  </div>
+  <p class="prose">Each season has its dates, a one-line goal, its path, a target number and how many proof links finish step 1. Keep ideas for seasons you haven't planned yet.</p>
+</section>
+
+<section id="agents" class="stack">
+  <span class="eyebrow">Agents</span>
+  <h2>The same brand, over MCP</h2>
+  <p class="prose">Every change in Brand is an Action, served to the page and to agents alike. To connect an agent, ask from a terminal and approve it on the Connections page:</p>
+  <pre>npm run connect -- "Claude Code"</pre>
+  <p class="prose">It prints the MCP endpoint and a key once. Agents read <code>/skill.md</code> for how to use Brand: read a brand with <code>brand__brand-read</code> before writing in its voice, and save plan steps with <code>brand__guidance-save</code>.</p>
+</section>
+
+<section id="data" class="stack">
+  <span class="eyebrow">Your data</span>
+  <h2>Brand is open source; your brands are not</h2>
+  <p class="prose">Everything a brand holds lives in <code>data/brand.db</code> on your computer. Git ignores <code>data/</code>, and the pre-commit hook and <code>npm run check:data</code> refuse database files and <code>.env</code>. Brand answers only requests from the same computer.</p>
+</section>
+
+<section id="run" class="stack">
+  <span class="eyebrow">Run it</span>
+  <h2>Install and start</h2>
+  <pre>npm install
+npm run build
+npm start</pre>
+  <p class="prose">It runs at <code>http://127.0.0.1:8093</code>. Set <code>PORT</code>, <code>HOST</code> and <code>DATA_DIR</code> to change the defaults. To bring brands over from Marketing, point the migration at a backup copy of its <code>data/pglite</code>:</p>
+  <pre>npm run migrate:marketing -- --from &lt;backup&gt;/data/pglite</pre>
+</section>
+
+<footer>
+  Brand is built on <a href="https://github.com/jaetask/open-agent-kit">open-agent-kit</a> and <a href="https://github.com/jaetask/toolkit">@jaetask/toolkit</a>. The plan follows hoeem's method. MIT licence.
+</footer>
+</div>
+</body>
+</html>

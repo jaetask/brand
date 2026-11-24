@@ -82,12 +82,6 @@ function BrandSections({ brand, path }: { brand: Brand; path: string }) {
           line="90 days at a time"
           current={at("seasons")}
         />
-        <SideLink
-          href={`${base}/history`}
-          label="History"
-          line="Every change, and who made it"
-          current={at("history")}
-        />
       </SideSection>
     </>
   );

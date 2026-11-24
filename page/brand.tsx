@@ -1,5 +1,4 @@
 import {
-  ActivityRow,
   CenteredPage,
   EditLink,
   Facts,
@@ -28,7 +27,7 @@ import {
 } from "./api.js";
 import { BrandMark } from "./brands.js";
 import { EditPage } from "./edit.js";
-import { act, NothingYet, day, Empty, Label, Muted, Pill, Text, when } from "./look.js";
+import { act, NothingYet, day, Empty, Label, Muted, Pill, Text } from "./look.js";
 import { addDays, checkIns, currentSeason, seasonDay, SEASON_BANDS, today } from "./season.js";
 
 export const HOEEM = "https://x.com/hooeem/status/2120955142438834287";
@@ -78,7 +77,6 @@ export function BrandPage({ id, parts }: { id: string; parts: string[] }) {
   if (section === "beliefs") return <BeliefsView d={detail} name={name} />;
   if (section === "voice") return <VoiceView d={detail} />;
   if (section === "seasons") return <SeasonsView d={detail} />;
-  if (section === "history") return <HistoryView d={detail} name={name} />;
   if (section === "plan" && sub) return <StepView d={detail} level={sub as PlanLevel} />;
   return <OverviewView d={detail} />;
 }
@@ -1272,45 +1270,6 @@ function SeasonsView({ d }: { d: Detail }) {
         ) : (
           <Muted>No ideas kept yet.</Muted>
         )}
-      </Panel>
-    </PageBody>
-  );
-}
-
-function HistoryView({ d, name }: { d: Detail; name: (id: string) => string }) {
-  return (
-    <PageBody title="History" line={`Every change to ${d.brand.name}, newest first.`}>
-      <Panel id="changes" title="Changes">
-        {d.history.length ? (
-          <div className="grid gap-1">
-            {d.history.map((h) => (
-              <ActivityRow key={h.id} time={when(h.createdAt)}>
-                <strong>{name(h.actorId)}</strong> {h.text}
-              </ActivityRow>
-            ))}
-          </div>
-        ) : (
-          <Muted>No changes yet.</Muted>
-        )}
-      </Panel>
-      <Panel
-        id="versions"
-        title={`Guidance versions · ${d.guidanceVersions.length}`}
-        line="Every save of voice, look and plan is kept."
-      >
-        <ListCard>
-          {d.guidanceVersions.slice(0, 50).map((v) => (
-            <ListRow key={v.n}>
-              <span className="grid">
-                <span className="font-medium">v{v.n}</span>
-                <small className="text-muted-foreground">
-                  {when(v.createdAt)} · {name(v.createdBy)}
-                  {v.note ? ` · ${v.note}` : ""}
-                </small>
-              </span>
-            </ListRow>
-          ))}
-        </ListCard>
       </Panel>
     </PageBody>
   );

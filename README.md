@@ -4,6 +4,8 @@ Define and maintain brands, many of them, in one place.
 
 Brand holds everything that makes a brand itself: who it is, what it believes, its voice, colours and type, the words it defines, and the plan it runs by. Agents and other Apps read it over MCP, so every draft, page and post starts from the same brand.
 
+**[Read the user guide](https://jaetask.github.io/brand/)** (source: [`docs/index.html`](docs/index.html))
+
 ## The goal
 
 Recreate the brand side of the Marketing app as its own App on [open-agent-kit](https://github.com/jaetask/open-agent-kit), styled with [@jaetask/toolkit](https://github.com/jaetask/toolkit). For each brand:

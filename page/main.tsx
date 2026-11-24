@@ -9,13 +9,14 @@ import {
   SideSection,
 } from "@jaetask/toolkit/suite";
 import { Toaster } from "@jaetask/toolkit/ui/toaster";
-import { IconArchive, IconLayoutGrid } from "@tabler/icons-react";
+import { IconArchive, IconLayoutGrid, IconPlug } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { type Brand, type Detail, type LevelStatus, useRead } from "./api.js";
 import { brandIcon } from "./look.js";
 import { ArchivePage, BrandsPage, NewBrandPage } from "./brands.js";
 import { BrandPage } from "./brand.js";
+import { ConnectionsPage } from "./connections.js";
 
 const hashPath = () => window.location.hash.replace(/^#/, "") || "/";
 function useHashPath() {
@@ -119,6 +120,7 @@ function App() {
   let page = <BrandsPage brands={brands} />;
   if (parts[0] === "brands" && parts[1] === "new") page = <NewBrandPage />;
   else if (parts[0] === "archive") page = <ArchivePage />;
+  else if (parts[0] === "connections") page = <ConnectionsPage />;
   else if (selected) page = <BrandPage key={selected} id={selected} parts={parts.slice(2)} />;
 
   return (
@@ -140,6 +142,12 @@ function App() {
             label: "Archive",
             icon: <IconArchive size={16} aria-hidden />,
             current: parts[0] === "archive",
+          },
+          {
+            href: "/connections",
+            label: "Connections",
+            icon: <IconPlug size={16} aria-hidden />,
+            current: parts[0] === "connections",
           },
         ]}
       >

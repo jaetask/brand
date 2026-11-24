@@ -16,6 +16,7 @@ import {
   type Proof,
   succeeded,
 } from "./api.js";
+import { addDays } from "./season.js";
 import { act, brandIcon, Choose, Field, Lines, lines, Pick, Rows, Tick, useDraft } from "./look.js";
 
 type Props = { detail: Detail; part: string; arg: string | undefined };
@@ -856,12 +857,6 @@ function AppsEdit({ d, back }: { d: Detail; back: string }) {
       </Row>
     </Frame>
   );
-}
-
-function addDays(iso: string, days: number) {
-  const t = new Date(`${iso}T00:00:00Z`);
-  t.setUTCDate(t.getUTCDate() + days);
-  return t.toISOString().slice(0, 10);
 }
 
 function SeasonEdit({ d, n, back }: { d: Detail; n: number; back: string }) {

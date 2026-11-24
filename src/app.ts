@@ -1,4 +1,5 @@
 import { randomBytes } from "node:crypto";
+import { readFile } from "node:fs/promises";
 import { createServer, type Server } from "node:http";
 import type { AddressInfo } from "node:net";
 import type { DatabaseSync } from "node:sqlite";
@@ -13,6 +14,7 @@ import { VERSION } from "./version.js";
 export type BrandOptions = {
   file: string;
   page?: string;
+  skill?: string;
   connect?: string[];
   log?: (line: string) => void;
   now?: () => number;
@@ -76,6 +78,11 @@ export async function createBrand(options: BrandOptions): Promise<BrandApp> {
     const { pathname } = new URL(request.url);
     if (!isLocal(request)) {
       return new Response("Brand answers on this computer only.", { status: 403 });
+    }
+    if (pathname === "/skill.md" && options.skill) {
+      return new Response(await readFile(options.skill), {
+        headers: { "content-type": "text/markdown; charset=utf-8", "cache-control": "no-cache" },
+      });
     }
     if (pathname === "/api/session" || pathname === "/api/sessions") {
       return Response.json({ error: "Not found." }, { status: 404 });

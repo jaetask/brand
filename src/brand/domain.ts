@@ -1,4 +1,10 @@
-import { defineAction, defineCard, defineDomain, type RunContext } from "@jaetask/open-agent-kit";
+import {
+  defineAction,
+  defineCard,
+  defineDomain,
+  Refusal,
+  type RunContext,
+} from "@jaetask/open-agent-kit";
 import { z } from "zod";
 import {
   Brand,
@@ -10,6 +16,7 @@ import {
   Identity,
   IdentityData,
   IdentityStatus,
+  OWNER,
   Peer,
   Persona,
   Proof,
@@ -201,7 +208,7 @@ const identityAdd = write({
     brands.addIdentity(
       brand,
       data,
-      status ?? (principal.id === "owner" ? "accepted" : "suggested"),
+      principal.id === OWNER ? (status ?? "accepted") : "suggested",
       principal.id,
     ),
 });
@@ -222,8 +229,11 @@ const identityStatusSet = write({
   subject: "identity",
   input: z.object({ identity: id, status: IdentityStatus, note: z.string().max(500).default("") }),
   output: Identity,
-  run: ({ identity, status, note }, { brands, principal }) =>
-    brands.changeIdentity(identity, { status }, note, principal.id),
+  run: ({ identity, status, note }, { brands, principal }) => {
+    if (status !== "suggested" && principal.id !== OWNER)
+      throw new Refusal("owner-only", "Only the owner accepts, rejects or retires a line.");
+    return brands.changeIdentity(identity, { status }, note, principal.id);
+  },
 });
 
 const proofInput = ProofData.partial().extend({ title: line });

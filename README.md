@@ -17,6 +17,24 @@ Recreate the brand side of the Marketing app as its own App on [open-agent-kit](
 
 Content, calendars, results and interviews are not part of Brand; they will live in their own App.
 
+## Run it
+
+```
+npm install
+npm run build
+npm start
+```
+
+Brand runs at http://127.0.0.1:8093 and keeps its data in `data/brand.db`. It answers only requests from this computer, and agents connect over MCP at `/mcp`. Set `PORT`, `HOST` and `DATA_DIR` to change the defaults.
+
+## Bring brands over from Marketing
+
+```
+npm run migrate:marketing -- --from <a backup copy of Marketing's data/pglite>
+```
+
+It copies every brand, its guidance versions, lines, proof, channels, accounts, peers, seasons and history into a new `data/brand.db`. It reads from a temporary copy of the backup, refuses Marketing's live database, never writes over an existing `data/brand.db`, and checks each table's count.
+
 ## Your data stays yours
 
 Brand is open source; your brands are not. Everything a brand holds lives in `data/` on your machine, which git ignores, and a pre-commit hook refuses database files, `data/` and `.env`.

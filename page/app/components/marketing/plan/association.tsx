@@ -20,6 +20,7 @@ import {
   muted,
 } from "@/components/marketing/kit/page";
 import { GAP_HINTS } from "@/components/marketing/plan/hints";
+import { Label } from "@/components/ui/label";
 import { usePlanSave, type PlanSave } from "@/components/marketing/plan/kit";
 import { stepEditPath, type StepEditProps } from "@/components/marketing/plan/step-edit";
 import { Button } from "@/components/ui/button";
@@ -369,11 +370,27 @@ function LookEdit({ detail, backTo }: { detail: EntityDetail; backTo: string }) 
     g.plan.association.visualConstants.length ? [...g.plan.association.visualConstants] : [""],
   );
   const [typography, setTypography] = useState(g.visual.typography);
+  const [frame, setFrame] = useState({
+    background: g.visual.frame?.background ?? "",
+    ink: g.visual.frame?.ink ?? "",
+    muted: g.visual.frame?.muted ?? "",
+    font: g.visual.frame?.font ?? "",
+    labelFont: g.visual.frame?.labelFont ?? "",
+  });
+  const setPart = (key: keyof typeof frame) => (value: string) =>
+    setFrame({ ...frame, [key]: value });
   const submit = async () => {
     setBusy(true);
+    const kept = Object.fromEntries(
+      Object.entries(frame).map(([k, v]) => [k, v.trim()]),
+    ) as typeof frame;
     const ok = await save({
       visualConstants: rows.map((r) => r.trim()).filter(Boolean),
-      visual: { ...g.visual, typography: typography.trim() },
+      visual: {
+        ...g.visual,
+        typography: typography.trim(),
+        ...(Object.values(kept).some(Boolean) ? { frame: kept } : {}),
+      },
     });
     setBusy(false);
     if (ok) navigate(backTo);
@@ -424,6 +441,30 @@ function LookEdit({ detail, backTo }: { detail: EntityDetail; backTo: string }) 
           onChange={(ev) => setTypography(ev.target.value)}
           placeholder="A typeface"
         />
+      </Row>
+      <Row
+        title="Image frame"
+        line="Every article image is drawn in this frame: the brand picture and @handle sit bottom right."
+      >
+        {(
+          [
+            ["background", "Background colour", "#7be8d3"],
+            ["ink", "Text colour", "#242424"],
+            ["muted", "Label colour", "#456e66"],
+            ["font", "Headline font", "Inter"],
+            ["labelFont", "Label font", "JetBrains Mono"],
+          ] as const
+        ).map(([key, label, example]) => (
+          <div key={key} className="grid gap-1">
+            <Label htmlFor={`frame-${key}`}>{label}</Label>
+            <Input
+              id={`frame-${key}`}
+              value={frame[key]}
+              onChange={(ev) => setPart(key)(ev.target.value)}
+              placeholder={example}
+            />
+          </div>
+        ))}
       </Row>
     </EditFrame>
   );

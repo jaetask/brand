@@ -328,6 +328,18 @@ export const guidance = z.object({
       colours: list(20, 40).default([]),
       typography: text(500).default(""),
       logos: list(10, 2000).default([]).describe("Logo asset paths or URLs; no design editor."),
+      frame: z
+        .object({
+          background: text(40).default(""),
+          ink: text(40).default(""),
+          muted: text(40).default(""),
+          font: text(200).default(""),
+          labelFont: text(200).default(""),
+        })
+        .optional()
+        .describe(
+          "The frame every article image shares: background, text and label colours as hex, the headline font and the label font.",
+        ),
     })
     .default({ colours: [], typography: "", logos: [] }),
   plan: brandPlan,

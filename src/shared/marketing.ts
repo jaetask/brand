@@ -1,3 +1,11 @@
+export type ImageFrame = {
+  background: string;
+  ink: string;
+  muted: string;
+  font: string;
+  labelFont: string;
+};
+
 export type ChannelKind = "x" | "blog" | "newsletter" | "website" | "other";
 
 export interface Entity {
@@ -56,7 +64,12 @@ export interface EntityGuidance {
   verbalStyle: string;
 
   voice?: Voice;
-  visual: { colours: string[]; typography: string; logos: string[] };
+  visual: {
+    colours: string[];
+    typography: string;
+    logos: string[];
+    frame?: ImageFrame;
+  };
 
   plan: BrandPlan;
 }

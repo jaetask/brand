@@ -13,7 +13,7 @@
 :root{
   --bg:#f4f6f6; --panel:#ffffff; --sunk:#e9eeee; --ink:#13201f; --muted:#56676a; --line:#d3dcdc;
   --pi:#0d7a6f; --pi-soft:#d6efeb; --an:#8a3f78; --an-soft:#f3e2ef;
-  --ok:#2f7d32; --ok-soft:#e1f1e1; --warn:#a86400; --warn-soft:#fbecd5; --bad:#b3261e; --bad-soft:#f9e0de;
+  --ok:#2f7d32; --ok-soft:#e1f1e1; --warn:#ea6c0a; --warn-soft:#fff1e6; --bad:#b3261e; --bad-soft:#f9e0de;
   --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -256,9 +256,9 @@ details.prob .attack b{color:var(--bad)} details.prob .answer2 b{color:var(--ok)
 .steps5 .btn{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left}
 .steps5 .btn small{font-size:.74rem;color:var(--muted);font-weight:400}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--line);margin-right:6px;vertical-align:middle}
-.dot.partial{background:#5cc28a} .dot.done{background:var(--ok)}
+.dot.partial{background:#f97316} .dot.done{background:var(--ok)}
 .meter{height:8px;border-radius:4px;background:var(--sunk);overflow:hidden;margin:10px 0 4px}
-.meter span{display:block;height:100%;background:#5cc28a;transition:width .2s}
+.meter span{display:block;height:100%;background:#f97316;transition:width .2s}
 .meter.full span{background:var(--ok)}
 .slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:12px}
 .slot{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:12px;min-height:92px;display:flex;flex-direction:column;gap:6px;font-size:.88rem}

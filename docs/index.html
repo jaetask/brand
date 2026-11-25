@@ -3,152 +3,633 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>Brand · User guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
+/* Layout: a long guide. Sticky section rail on top, one column of prose,
+   interactive "bench" panels for the moving parts. */
 :root{
-  --bg:#f5f6f8; --panel:#ffffff; --sunk:#eceef2; --ink:#161b24; --muted:#5a6372; --line:#d8dce3;
-  --accent:#2f5bd3; --accent-soft:#e5ebfb; --ok:#1f7a4d; --ok-soft:#e2f2ea; --part:#9a5b12; --part-soft:#f8ecdc;
-  --display:"Fraunces", Georgia, serif;
-  --body:"IBM Plex Sans", system-ui, sans-serif;
-  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --bg:#f4f6f6; --panel:#ffffff; --sunk:#e9eeee; --ink:#13201f; --muted:#56676a; --line:#d3dcdc;
+  --pi:#0d7a6f; --pi-soft:#d6efeb; --an:#8a3f78; --an-soft:#f3e2ef;
+  --ok:#2f7d32; --ok-soft:#e1f1e1; --warn:#a86400; --warn-soft:#fbecd5; --bad:#b3261e; --bad-soft:#f9e0de;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
 }
-@media (prefers-color-scheme: dark){:root{
-  --bg:#10141b; --panel:#171d26; --sunk:#1f2632; --ink:#e7eaf0; --muted:#9aa4b3; --line:#2a3340;
-  --accent:#8aa8ff; --accent-soft:#1c2846; --ok:#6fd39f; --ok-soft:#14301f; --part:#f0b46b; --part-soft:#36261a; color-scheme:dark}}
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body)}
-a{color:var(--accent)}
-code{font-family:var(--mono);font-size:.88em;background:var(--sunk);padding:.08em .35em;border-radius:4px}
-pre{font-family:var(--mono);font-size:.88em;background:var(--sunk);padding:14px 16px;border-radius:8px;overflow-x:auto;margin:0}
-.wrap{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.prose{max-width:66ch}
-h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0;font-weight:600}
-h1{font-size:clamp(2.1rem,5vw,3rem)}
-h2{font-size:clamp(1.45rem,3vw,1.9rem)}
-h3{font-size:1.1rem}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--panel)}
+a{color:var(--pi)}
+code,.mono{font-family:var(--mono);font-size:.88em}
+:not(pre)>code{background:var(--sunk);padding:.08em .35em;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.prose{max-width:68ch}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
 p{margin:0}
-.eyebrow{font:500 .74rem var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
 .stack{display:flex;flex-direction:column;gap:14px}
-header{padding-block:56px 28px}
-section{padding-block:44px;border-top:1px solid var(--line)}
-nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-nav.toc a{font-size:.9rem;text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:4px 12px;border-radius:999px;color:var(--ink)}
-.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.step{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-.n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--panel);font:600 .9rem var(--mono)}
-.step h3{margin-bottom:4px}
-.step p{color:var(--muted)}
-.done{font:500 .78rem var(--mono);color:var(--muted);margin-top:6px}
-.band{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-@media (max-width:640px){.band{grid-template-columns:1fr}}
-.band div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-.band b{display:block}
-.band small{color:var(--muted);font-family:var(--mono)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media (max-width:640px){.grid2{grid-template-columns:1fr}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
-.card h3{margin-bottom:6px}
-.card p{color:var(--muted)}
-.states{display:flex;flex-wrap:wrap;gap:8px}
-.pill{font:500 .78rem var(--mono);padding:3px 10px;border-radius:999px;border:1px solid var(--line)}
-.pill.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
-.pill.part{background:var(--part-soft);color:var(--part);border-color:transparent}
-footer{padding-block:40px 64px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+section{padding-block:56px;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+
+/* nav */
+nav.rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--panel);border-bottom:1px solid var(--line)}
+nav.rail .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:thin}
+nav.rail a{flex:none;font-size:.86rem;font-weight:500;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px;white-space:nowrap}
+nav.rail a:hover,nav.rail a:focus-visible{color:var(--ink);background:var(--sunk);outline:none}
+nav.rail a.on{color:var(--pi);background:var(--pi-soft)}
+
+/* hero */
+header.hero{padding-block:48px 40px}
+.hero .stack{gap:18px}
+.lede{font-size:1.15rem;color:var(--muted);max-width:62ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-family:var(--mono);font-size:.76rem;padding:3px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--panel)}
+.tag.pi{border-color:var(--pi);color:var(--pi)}
+.tag.an{border-color:var(--an);color:var(--an)}
+.answer{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:8px}
+.answer > div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.answer > div > b:first-child{display:block;font-family:var(--display);font-size:1.05rem;margin-bottom:4px}
+
+/* bench panels */
+.bench{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:22px}
+.bench-head{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+.btn{font:inherit;font-size:.88rem;font-weight:500;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:6px 12px;border-radius:7px;cursor:pointer}
+.btn:hover{border-color:var(--pi)}
+.btn:focus-visible{outline:2px solid var(--pi);outline-offset:2px}
+.btn.primary{background:var(--pi);border-color:var(--pi);color:var(--panel)}
+.btn.danger{border-color:var(--bad);color:var(--bad)}
+.btn[aria-pressed="true"]{background:var(--pi-soft);border-color:var(--pi);color:var(--pi)}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* actor map */
+.layers{display:flex;flex-direction:column;gap:10px}
+.layer{display:grid;grid-template-columns:130px 1fr;gap:10px;align-items:start}
+.layer-name{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:9px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.actor{font:inherit;font-size:.9rem;font-weight:500;background:var(--sunk);border:1px solid transparent;color:var(--ink);padding:7px 11px;border-radius:8px;cursor:pointer;text-align:left}
+.actor:hover{border-color:var(--pi)}
+.actor:focus-visible{outline:2px solid var(--pi);outline-offset:2px}
+.actor.on{background:var(--pi-soft);border-color:var(--pi);color:var(--pi)}
+.actor.rel{border-color:var(--pi);border-style:dashed}
+.detail{margin-top:16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;border-top:1px solid var(--line);padding-top:16px}
+.detail h3{margin-bottom:6px}
+.detail .rels{font-size:.88rem;color:var(--muted)}
+pre{margin:0;background:var(--sunk);border-radius:8px;padding:12px 14px;overflow-x:auto;font-family:var(--mono);font-size:.8rem;line-height:1.55;min-width:0}
+pre .c{color:var(--muted)}
+pre .k{color:var(--pi)}
+.caption{font-size:.82rem;color:var(--muted)}
+
+/* run stepper */
+.run-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:14px}
+.col{background:var(--sunk);border-radius:9px;padding:12px;min-width:0}
+.col h4{margin:0 0 8px;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.entry,.task{font-family:var(--mono);font-size:.78rem;padding:6px 8px;border-radius:6px;background:var(--panel);border:1px solid var(--line);margin-bottom:6px;overflow-wrap:anywhere}
+.entry.new,.task.new{border-color:var(--pi);box-shadow:0 0 0 2px var(--pi-soft)}
+.task .st{float:right;font-size:.7rem;padding:0 6px;border-radius:999px;background:var(--sunk);color:var(--muted)}
+.task .st.running{background:var(--pi-soft);color:var(--pi)}
+.task .st.waiting{background:var(--warn-soft);color:var(--warn)}
+.task .st.done{background:var(--ok-soft);color:var(--ok)}
+.task.child{margin-left:16px}
+.stepinfo{margin-top:14px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.box{border-radius:9px;padding:12px 14px;font-size:.92rem}
+.box.say{background:var(--pi-soft)}
+.box.crash{background:var(--bad-soft)}
+.box.crash b{color:var(--bad)}
+.box.say b{color:var(--pi)}
+.progress{display:flex;gap:4px}
+.progress span{width:22px;height:5px;border-radius:3px;background:var(--line)}
+.progress span.on{background:var(--pi)}
+.empty{font-size:.8rem;color:var(--muted);font-style:italic}
+
+/* tool lab */
+.lab{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:18px}
+.picker{display:flex;flex-direction:column;gap:8px}
+.picker .btn{text-align:left}
+.picker .btn small{display:block;color:var(--muted);font-size:.76rem;font-weight:400}
+.timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 12px 16px}
+.timeline li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--panel);border:2px solid var(--pi)}
+.timeline li.bad::before{border-color:var(--bad);background:var(--bad-soft)}
+.timeline li.wait::before{border-color:var(--warn);background:var(--warn-soft)}
+.timeline li.ok::before{border-color:var(--ok);background:var(--ok-soft)}
+.timeline b{display:block;font-size:.92rem}
+.timeline span{font-size:.86rem;color:var(--muted)}
+.vs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:6px}
+.vs > div{border-radius:9px;padding:12px 14px;min-width:0}
+.vs .pi-side{background:var(--pi-soft)}
+.vs .an-side{background:var(--an-soft)}
+.vs h4{margin:0 0 8px;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.vs .pi-side h4{color:var(--pi)}
+.vs .an-side h4{color:var(--an)}
+.vs .an-side p{font-size:.9rem}
+
+/* cards */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.card h3{font-size:1.02rem}
+.card p{font-size:.92rem;color:var(--muted)}
+
+/* mapping table */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.filters input{font:inherit;font-size:.9rem;padding:6px 10px;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--ink);min-width:0;flex:1 1 200px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.88rem}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--sunk);position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+td.an-col code{background:var(--an-soft)}
+td.pi-col code{background:var(--pi-soft)}
+.fit{display:inline-block;font-family:var(--mono);font-size:.72rem;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.fit.better{background:var(--ok-soft);color:var(--ok)}
+.fit.direct{background:var(--pi-soft);color:var(--pi)}
+.fit.adapter{background:var(--warn-soft);color:var(--warn)}
+.fit.gap{background:var(--bad-soft);color:var(--bad)}
+.tally{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.tally .fit{font-size:.8rem;padding:4px 10px}
+
+/* paths */
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:20px}
+.path{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.path.rec{border-color:var(--pi);box-shadow:0 0 0 1px var(--pi)}
+.path .verdict{font-family:var(--mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.06em}
+.path.rec .verdict{color:var(--pi)}
+.path ul{margin:0;padding-left:18px;font-size:.9rem;color:var(--muted)}
+.diagram{display:flex;flex-direction:column;gap:6px;font-family:var(--mono);font-size:.74rem}
+.diagram div{padding:6px 8px;border-radius:6px;text-align:center}
+.d-an{background:var(--an-soft);color:var(--an)}
+.d-pi{background:var(--pi-soft);color:var(--pi)}
+.d-x{background:var(--sunk);color:var(--muted)}
+.d-arrow{color:var(--muted);padding:0!important}
+
+/* verdict */
+.verdict-box{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--pi);border-radius:10px;padding:20px;margin-top:18px}
+.checklist{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:8px}
+.checklist label{display:flex;gap:10px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer}
+.checklist input{margin-top:5px;accent-color:var(--pi)}
+.checklist b{display:block;font-size:.95rem}
+.checklist span{font-size:.86rem;color:var(--muted)}
+footer{padding-block:40px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+
+/* figures (inline SVG diagrams) */
+figure.fig{margin:22px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.fig-scroll{overflow-x:auto}
+figure.fig svg{display:block;width:100%;height:auto;color:var(--ink)}
+figure.fig figcaption{font-size:.86rem;color:var(--muted);margin-top:10px;max-width:80ch}
+.s-box{fill:var(--panel);stroke:var(--line);stroke-width:1.2}
+.s-sunk{fill:var(--sunk);stroke:var(--line);stroke-width:1}
+.s-pi{fill:var(--pi-soft);stroke:var(--pi);stroke-width:1.4}
+.s-an{fill:var(--an-soft);stroke:var(--an);stroke-width:1.4}
+.s-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.4}
+.s-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.4}
+.s-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.4}
+.s-dash{fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4}
+.ln{stroke:currentColor;stroke-width:1.4;fill:none}
+.ln-pi{stroke:var(--pi);stroke-width:1.6;fill:none}
+.ln-an{stroke:var(--an);stroke-width:1.6;fill:none}
+.ln-bad{stroke:var(--bad);stroke-width:1.5;fill:none;stroke-dasharray:6 4}
+.ln-mut{stroke:var(--muted);stroke-width:1.2;fill:none}
+.t{font-family:var(--body);font-size:13px;fill:currentColor}
+.tb{font-family:var(--body);font-size:13px;font-weight:600;fill:currentColor}
+.th{font-family:var(--display);font-size:15px;font-weight:700;fill:currentColor}
+.ts{font-family:var(--body);font-size:11px;fill:var(--muted)}
+.tm{font-family:var(--mono);font-size:11.5px;fill:currentColor}
+.c-pi{fill:var(--pi)} .c-an{fill:var(--an)} .c-bad{fill:var(--bad)} .c-warn{fill:var(--warn)} .c-ok{fill:var(--ok)} .c-mut{fill:var(--muted)}
+.mk{fill:currentColor} .mk-pi{fill:var(--pi)} .mk-an{fill:var(--an)} .mk-bad{fill:var(--bad)} .mk-mut{fill:var(--muted)}
+.plugin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:18px}
+
+@media (max-width:820px){
+  .run-grid{grid-template-columns:minmax(0,1fr)}
+  .stepinfo,.detail,.vs,.lab{grid-template-columns:minmax(0,1fr)}
+  .layer{grid-template-columns:minmax(0,1fr)}
+  .layer-name{padding-top:0}
+}
+@media (prefers-reduced-motion:no-preference){
+  .entry.new,.task.new{animation:pop .35s ease-out}
+  @keyframes pop{from{transform:translateY(-3px);opacity:.6}to{transform:none;opacity:1}}
+}
+</style>
+<style>
+/* glossary, details and rules */
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-top:14px}
+.term{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px 14px;min-width:0}
+.term b{font-family:var(--display);font-size:1rem}
+.term p{font-size:.88rem;color:var(--muted);margin-top:4px}
+.term .avoid{font-size:.78rem;font-style:italic;margin-top:6px}
+.term .ddd{font-family:var(--mono);font-size:.7rem;color:var(--an);float:right;margin-left:8px}
+details.prob{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:0;margin-top:10px}
+details.prob summary{cursor:pointer;padding:13px 16px;font-weight:600;display:flex;gap:10px;align-items:baseline;list-style:none}
+details.prob summary::-webkit-details-marker{display:none}
+details.prob summary::before{content:"+";font-family:var(--mono);color:var(--pi);width:1ch;flex:none}
+details.prob[open] summary::before{content:"–"}
+details.prob summary:focus-visible{outline:2px solid var(--pi);outline-offset:2px;border-radius:10px}
+details.prob .body{padding:0 16px 14px 36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;font-size:.92rem}
+details.prob .body div b{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+details.prob .attack b{color:var(--bad)} details.prob .answer2 b{color:var(--ok)}
+.node rect{fill:var(--panel);stroke:var(--line);stroke-width:1.3}
+.node.end rect{fill:var(--sunk)}
+.node.on rect{fill:var(--pi-soft);stroke:var(--pi);stroke-width:2.2}
+.node.on text{fill:var(--pi)}
+.simlog{font-family:var(--mono);font-size:.78rem;background:var(--sunk);border-radius:8px;padding:10px 12px;min-height:44px;overflow-wrap:anywhere}
+.phase{display:grid;grid-template-columns:54px minmax(0,1fr);gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.phase:first-child{border-top:0}
+.phase .n{font-family:var(--display);font-size:1.6rem;font-weight:700;color:var(--pi);line-height:1}
+.phase h3{margin-bottom:4px}
+.phase p{font-size:.92rem;color:var(--muted)}
+.phase .proof{font-size:.84rem;margin-top:6px;color:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:14px;margin-top:18px}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:18px}
+@media (max-width:820px){details.prob .body{grid-template-columns:minmax(0,1fr);padding-left:16px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="stack">
-  <span class="eyebrow">Brand · user guide</span>
-  <h1>Define and maintain many brands in one place</h1>
-  <p class="prose">Brand holds everything that makes a brand itself: who it is, what it believes, how it sounds and looks, and the plan it runs by. Your agents read the same brand over MCP, so every draft, page and post starts from it.</p>
-  <nav class="toc" aria-label="On this page">
-    <a href="#brands">Brands</a><a href="#profile">Profile</a><a href="#lines">Lines</a><a href="#plan">The plan</a><a href="#seasons">Seasons</a><a href="#agents">Agents</a><a href="#data">Your data</a><a href="#run">Run it</a>
-  </nav>
+<style>
+/* brand panels */
+.steps5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.steps5 .btn{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left}
+.steps5 .btn small{font-size:.74rem;color:var(--muted);font-weight:400}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--line);margin-right:6px;vertical-align:middle}
+.dot.partial{background:var(--warn)} .dot.done{background:var(--ok)}
+.meter{height:8px;border-radius:4px;background:var(--sunk);overflow:hidden;margin:10px 0 4px}
+.meter span{display:block;height:100%;background:var(--warn);transition:width .2s}
+.meter.full span{background:var(--ok)}
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:12px}
+.slot{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:12px;min-height:92px;display:flex;flex-direction:column;gap:6px;font-size:.88rem}
+.slot.need{border:1px dashed var(--warn);background:var(--warn-soft);color:var(--warn);align-items:center;justify-content:center;font-weight:600}
+.slot.spare{border:1px dashed var(--line);color:var(--muted);align-items:center;justify-content:center}
+.slot .ok{align-self:flex-end;font-size:.72rem;font-family:var(--mono);background:var(--ok-soft);color:var(--ok);padding:1px 8px;border-radius:999px}
+.slot code{font-size:.74rem;color:var(--muted);background:none;padding:0;overflow-wrap:anywhere}
+.entries{display:grid;gap:8px;margin-top:14px}
+.entryrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;background:var(--sunk);border-radius:8px;padding:8px 10px;font-size:.88rem}
+.days{width:100%;accent-color:var(--pi)}
+.bands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.bands div{border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:var(--panel);font-size:.86rem}
+.bands div.now{border-color:var(--pi);background:var(--pi-soft)}
+.bands b{display:block;font-family:var(--display)}
+@media (max-width:720px){.steps5{grid-template-columns:repeat(2,minmax(0,1fr))}.bands{grid-template-columns:minmax(0,1fr)}.entryrow{grid-template-columns:minmax(0,1fr)}}
+</style>
+
+<nav class="rail" id="rail" aria-label="Sections">
+  <div class="wrap">
+    <a href="#goal">Brand</a><a href="#words">Words</a><a href="#brands">Your brands</a><a href="#profile">Profile</a><a href="#lines">Lines</a><a href="#plan">The plan</a><a href="#proof">Proof</a><a href="#seasons">Seasons</a><a href="#agents">Your agents</a><a href="#run">Running it</a><a href="#faq">Questions</a>
+  </div>
+</nav>
+
+<header class="hero" id="goal">
+  <div class="wrap stack">
+    <span class="eyebrow">User guide · Brand · built on open-agent-kit</span>
+    <h1>Define and maintain your brands in one place</h1>
+    <p class="lede">Brand holds everything that makes each of your brands itself: who it is, what it believes, how it sounds and looks, and the plan it runs by. Your agents read the same brand, so every draft and post they make starts from it.</p>
+    <div class="answer">
+      <div><b>Many brands, one app</b>Yourself, a product, a company: each brand has its own profile, lines, voice and plan.</div>
+      <div><b>Run by one method</b>Every brand follows the five steps of hoeem's "I want to turn my X account into income", 90 days at a time.</div>
+      <div><b>Your data stays yours</b>Brand is open source. Your brands live in a folder on your computer and never go into the code.</div>
+    </div>
+  </div>
+  <div class="wrap">
+    <figure class="fig">
+      <div class="fig-scroll">
+      <svg viewBox="0 0 900 170" style="min-width:620px" role="img" aria-label="You and your agents write to Brand. Brand holds each brand's profile, lines, voice and plan. Other apps read it when they draft.">
+        <defs><marker id="h1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="mk-mut"/></marker></defs>
+        <rect x="20" y="36" width="180" height="38" rx="8" class="s-sunk"/><text x="110" y="60" text-anchor="middle" class="t">You, on the page</text>
+        <rect x="20" y="96" width="180" height="38" rx="8" class="s-an"/><text x="110" y="120" text-anchor="middle" class="t">Your agents, over MCP</text>
+        <path d="M200 55 H250 M200 115 H250 M250 55 V115" class="ln-mut"/><path d="M250 85 H296" class="ln-mut" marker-end="url(#h1)"/>
+        <rect x="300" y="20" width="400" height="130" rx="12" class="s-box"/>
+        <text x="320" y="46" class="th">Brand</text>
+        <rect x="320" y="60" width="86" height="72" rx="8" class="s-sunk"/><text x="363" y="100" text-anchor="middle" class="ts">profile</text>
+        <rect x="414" y="60" width="86" height="72" rx="8" class="s-sunk"/><text x="457" y="100" text-anchor="middle" class="ts">lines</text>
+        <rect x="508" y="60" width="86" height="72" rx="8" class="s-sunk"/><text x="551" y="100" text-anchor="middle" class="ts">voice</text>
+        <rect x="602" y="60" width="86" height="72" rx="8" class="s-pi"/><text x="645" y="100" text-anchor="middle" class="ts">plan</text>
+        <path d="M700 85 H756" class="ln-mut" marker-end="url(#h1)"/>
+        <rect x="760" y="48" width="120" height="74" rx="8" class="s-dash"/><text x="820" y="80" text-anchor="middle" class="t">Your other apps</text><text x="820" y="98" text-anchor="middle" class="ts">draft from it</text>
+      </svg>
+      </div>
+      <figcaption>You and your agents keep each brand up to date in Brand. Other apps read the brand before they write anything in its name.</figcaption>
+    </figure>
+  </div>
 </header>
 
-<section id="brands" class="stack">
-  <span class="eyebrow">Brands</span>
-  <h2>One sidebar, every brand</h2>
-  <p class="prose">Each brand sits in the sidebar with its picture, or an icon and colour, and a dot that is orange until its plan reaches 100% and green after. Open one and it shows What you believe, then the plan for this season: the Overview and the five steps, each with its own dot. The Brands page adds a brand, hides one from the sidebar, archives it or, once archived, deletes it after a backup.</p>
-</section>
-
-<section id="profile" class="stack">
-  <span class="eyebrow">Profile</span>
-  <h2>Who you are, and where you post</h2>
-  <p class="prose">Open the profile from the brand's row in the sidebar. Every panel has an Edit button that opens an edit page with Back, Cancel and Save.</p>
-  <div class="grid2">
-    <div class="card"><h3>Identity</h3><p>Picture, name, tagline, the brand's colours and its images.</p></div>
-    <div class="card"><h3>What you're aiming for</h3><p>The brand's goals.</p></div>
-    <div class="card"><h3>How you sound</h3><p>Key phrases, borrowed phrases with their credit, tone rules and an example in your own words.</p></div>
-    <div class="card"><h3>Who you look up to</h3><p>The peers each account wants to learn from and contribute to.</p></div>
-    <div class="card"><h3>Where you post</h3><p>Channels, the accounts on each, and each account's persona.</p></div>
-    <div class="card"><h3>Seasons</h3><p>This season and the next, with the season editor one click away.</p></div>
+<section id="words">
+  <div class="wrap">
+    <div class="stack prose">
+      <span class="eyebrow">1 · Words</span>
+      <h2>The words Brand uses</h2>
+      <p>Brand uses a handful of words with one meaning each. They appear on the page, in your agents' answers and in this guide.</p>
+    </div>
+    <div class="bench">
+      <div class="filters"><input id="glossSearch" type="search" placeholder="Filter the words, for example proof or season" aria-label="Filter the words"></div>
+      <div class="gloss" id="gloss"></div>
+    </div>
   </div>
 </section>
 
-<section id="lines" class="stack">
-  <span class="eyebrow">What you believe</span>
-  <h2>Lines that define your character</h2>
-  <p class="prose">A line is a short, quotable sentence, with credit when the idea is someone else's, the thought behind it and the themes it supports. Agents suggest lines; only you accept, reject or retire them. Every change to a line is kept.</p>
-  <div class="states"><span class="pill">suggested</span><span class="pill ok">accepted</span><span class="pill">rejected</span><span class="pill">retired</span></div>
-</section>
-
-<section id="plan" class="stack">
-  <span class="eyebrow">The plan</span>
-  <h2>hoeem's five steps</h2>
-  <p class="prose">Every brand runs by the method in hoeem's <a href="https://x.com/hooeem/status/2120955142438834287">"I want to turn my X account into income"</a>. Each step has a "Done when" list; a step is done when every check passes, partial when some do.</p>
-  <div class="states"><span class="pill ok">done</span><span class="pill part">partial</span><span class="pill">not started</span></div>
-  <ol class="steps">
-    <li class="step"><span class="n">1</span><div><h3>Proof</h3><p>Without proof, everything after is opinion. Choose path A (results you already have) or B (a 30-day volume sprint to earn them). Proof counts when it is firsthand and has a link anyone can open.</p><p class="done">Done when: a path is chosen, and the season's proof links are in place.</p></div></li>
-    <li class="step"><span class="n">2</span><div><h3>Your person</h3><p>Who it's for, their pain and what they already pay for, scored on four tests: growing market, acute pain, purchasing power and algorithmic clarity. The funnel narrows from everyone to your person.</p><p class="done">Done when: who, pain and pays-for are written, all four tests are scored 1 to 10, and audiences and the audience promise are set.</p></div></li>
-    <li class="step"><span class="n">3</span><div><h3>Association</h3><p>What people learn to expect through repetition: your themes, what you stand against, your visual constants and your verbal style.</p><p class="done">Done when: 5 themes with a post idea, 3 things you stand against with your standard, 2 or 3 visual constants, and a verbal style.</p></div></li>
-    <li class="step"><span class="n">4</span><div><h3>Product</h3><p>Marketing says what you promise; the free thing proves it. Each free product has a hook, a link and release gates.</p><p class="done">Done when: a free product has its hook, and it delivers on it.</p></div></li>
-    <li class="step"><span class="n">5</span><div><h3>Belt</h3><p>A public project with a result, a date and visible progress, so people come back every week.</p><p class="done">Done when: project, exact promise, target number, launch date, where the deadline shows, the delay plan and a weekly check-in day.</p></div></li>
-  </ol>
-  <p class="prose">Each step opens with hoeem's line and a link to his guide, with his diagrams beside it when they are in <code>data/brand-plan-images</code>, then the "Done when" checks and the step's own panels. Every save of the plan is a new numbered version. The Overview shows the season, today's day of 90, the goal, the path, all five steps and the next thing to do.</p>
-</section>
-
-<section id="seasons" class="stack">
-  <span class="eyebrow">Seasons</span>
-  <h2>90 days at a time</h2>
-  <div class="band">
-    <div><b>Proof sprint</b><small>Days 1–30</small></div>
-    <div><b>Your person + Association</b><small>Days 31–60</small></div>
-    <div><b>Product + Belt</b><small>Days 61–90</small></div>
+<section id="brands">
+  <div class="wrap">
+    <div class="stack prose">
+      <span class="eyebrow">2 · Your brands</span>
+      <h2>Every brand sits in the sidebar</h2>
+      <p>Each brand has a row in the sidebar with its picture, or an icon and colour, and a dot: orange while its plan is under 100%, green once every step is done. Open a brand and it shows <b>What you believe</b>, then this season's plan: the <b>Overview</b> and the five steps, each with its own dot.</p>
+      <p>The <b>Brands</b> page adds a brand, hides one from the sidebar, or archives it. An archived brand keeps everything. Deleting is a separate, deliberate step: you type the brand's name, and Brand writes a backup of every row before it removes anything.</p>
+    </div>
   </div>
-  <p class="prose">Each season has its dates, a one-line goal, its path, a target number and how many proof links finish step 1. Keep ideas for seasons you haven't planned yet.</p>
 </section>
 
-<section id="agents" class="stack">
-  <span class="eyebrow">Agents</span>
-  <h2>The same brand, over MCP</h2>
-  <p class="prose">Every change in Brand is an Action, served to the page and to agents alike. To connect an agent, ask from a terminal and approve it on the Connections page:</p>
-  <pre>npm run connect -- "Claude Code"</pre>
-  <p class="prose">It prints the MCP endpoint and a key once. Agents read <code>/skill.md</code> for how to use Brand: read a brand with <code>brand__get-entity</code> before writing in its voice, and save plan steps with <code>brand__save-plan-level</code>.</p>
+<section id="profile">
+  <div class="wrap">
+    <div class="stack prose">
+      <span class="eyebrow">3 · Profile</span>
+      <h2>Who the brand is, how it sounds, and where it posts</h2>
+      <p>Open the profile from the brand's row. Each panel has an <b>Edit</b> button that opens its own edit page with Back, Cancel and Save, so you always change one thing at a time.</p>
+    </div>
+    <div class="grid3">
+      <div class="card"><h3>Identity</h3><p>Picture, name, tagline, the brand's colours and its images.</p></div>
+      <div class="card"><h3>What you're aiming for</h3><p>The brand's goals, one per line.</p></div>
+      <div class="card"><h3>How you sound</h3><p>Key phrases, borrowed phrases with their credit, tone rules and an example in your own words.</p></div>
+      <div class="card"><h3>Who you look up to</h3><p>The peers each account learns from and wants to contribute to.</p></div>
+      <div class="card"><h3>Where you post</h3><p>Channels, the accounts on each, and each account's persona.</p></div>
+      <div class="card"><h3>Seasons</h3><p>This season and the next, with the season editor one click away.</p></div>
+    </div>
+  </div>
 </section>
 
-<section id="data" class="stack">
-  <span class="eyebrow">Your data</span>
-  <h2>Brand is open source; your brands are not</h2>
-  <p class="prose">Everything a brand holds lives in <code>data/pglite</code> on your computer. Git ignores <code>data/</code>, and the pre-commit hook and <code>npm run check:data</code> refuse database files and <code>.env</code>. Brand answers only requests from the same computer.</p>
+<section id="lines">
+  <div class="wrap">
+    <div class="stack prose">
+      <span class="eyebrow">4 · Lines</span>
+      <h2>Lines that define the brand's character</h2>
+      <p>A <b>line</b> is a short, quotable sentence the brand stands by, with credit when the idea is someone else's, the thought behind it and the themes it supports. Agents can suggest lines. Only you accept or reject them, and every version of a line is kept.</p>
+    </div>
+    <figure class="fig">
+      <div class="fig-scroll">
+      <svg viewBox="0 0 900 120" style="min-width:600px" role="img" aria-label="An agent suggests a line. You accept it into your lines or reject it.">
+        <defs><marker id="l1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="mk-mut"/></marker></defs>
+        <rect x="20" y="40" width="200" height="44" rx="8" class="s-an"/><text x="120" y="60" text-anchor="middle" class="tb">An agent suggests</text><text x="120" y="76" text-anchor="middle" class="ts">"Ship small, every week"</text>
+        <path d="M220 62 H306" class="ln-mut" marker-end="url(#l1)"/>
+        <rect x="310" y="40" width="200" height="44" rx="8" class="s-warn"/><text x="410" y="60" text-anchor="middle" class="tb">Suggested</text><text x="410" y="76" text-anchor="middle" class="ts">waits for you</text>
+        <path d="M510 52 C560 40 580 30 626 30 M510 72 C560 84 580 92 626 92" class="ln-mut"/>
+        <path d="M620 30 H626" class="ln-mut" marker-end="url(#l1)"/><path d="M620 92 H626" class="ln-mut" marker-end="url(#l1)"/>
+        <rect x="630" y="10" width="250" height="40" rx="8" class="s-ok"/><text x="755" y="35" text-anchor="middle" class="tb">Accepted: one of your lines</text>
+        <rect x="630" y="72" width="250" height="40" rx="8" class="s-sunk"/><text x="755" y="97" text-anchor="middle" class="t">Rejected: kept, out of the way</text>
+      </svg>
+      </div>
+      <figcaption>Your own lines go straight in. A suggestion from an agent waits under Suggested until you decide.</figcaption>
+    </figure>
+  </div>
 </section>
 
-<section id="run" class="stack">
-  <span class="eyebrow">Run it</span>
-  <h2>Install and start</h2>
-  <pre>npm install
+<section id="plan">
+  <div class="wrap">
+    <div class="stack prose">
+      <span class="eyebrow">5 · The plan</span>
+      <h2>Five steps, in hoeem's order</h2>
+      <p>Every brand runs by the method in hoeem's <a href="https://x.com/hooeem/status/2120955142438834287">"I want to turn my X account into income"</a>. Each step opens with hoeem's line and a link to his guide, then a <b>Done when</b> panel: the checks the step needs. A step is <b>done</b> when every check passes, <b>partial</b> when some do, and <b>empty</b> before you start.</p>
+      <p>Every save of the plan is a new numbered version, so nothing you wrote is lost. The Overview shows the season, today's day of 90, the goal, the path, all five steps and the next thing to do.</p>
+    </div>
+    <figure class="fig">
+      <div class="fig-scroll">
+      <svg viewBox="0 0 900 110" style="min-width:640px" role="img" aria-label="The five steps in order: Proof, Your person, Association, Product, Belt.">
+        <defs><marker id="p1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="mk-pi"/></marker></defs>
+        <rect x="10" y="26" width="150" height="58" rx="8" class="s-box"/><text x="85" y="50" text-anchor="middle" class="tb">1 Proof</text><text x="85" y="68" text-anchor="middle" class="ts">results people can check</text>
+        <path d="M160 55 H186" class="ln-pi" marker-end="url(#p1)"/>
+        <rect x="190" y="26" width="150" height="58" rx="8" class="s-box"/><text x="265" y="50" text-anchor="middle" class="tb">2 Your person</text><text x="265" y="68" text-anchor="middle" class="ts">who it is for</text>
+        <path d="M340 55 H366" class="ln-pi" marker-end="url(#p1)"/>
+        <rect x="370" y="26" width="150" height="58" rx="8" class="s-box"/><text x="445" y="50" text-anchor="middle" class="tb">3 Association</text><text x="445" y="68" text-anchor="middle" class="ts">what they keep seeing</text>
+        <path d="M520 55 H546" class="ln-pi" marker-end="url(#p1)"/>
+        <rect x="550" y="26" width="150" height="58" rx="8" class="s-box"/><text x="625" y="50" text-anchor="middle" class="tb">4 Product</text><text x="625" y="68" text-anchor="middle" class="ts">a free thing that delivers</text>
+        <path d="M700 55 H726" class="ln-pi" marker-end="url(#p1)"/>
+        <rect x="730" y="26" width="160" height="58" rx="8" class="s-pi"/><text x="810" y="50" text-anchor="middle" class="tb">5 Belt</text><text x="810" y="68" text-anchor="middle" class="ts">a dated public project</text>
+      </svg>
+      </div>
+    </figure>
+    <div class="bench">
+      <div class="bench-head"><h3>Tick what is in place</h3><span class="caption">Pick a step and tick its checks to see how its dot changes.</span></div>
+      <div class="steps5" id="stepPick"></div>
+      <div id="stepChecks" class="checklist"></div>
+      <div class="meter" id="stepMeter"><span></span></div>
+      <div class="box say" id="stepSay"></div>
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="wrap">
+    <div class="stack prose">
+      <span class="eyebrow">6 · Proof</span>
+      <h2>Proof counts once anyone can open it</h2>
+      <p>Proof is something the brand can show: something you built or did, a story, an opinion, or someone else's source. When content is easy to make, real work is what people trust, so Brand never invents a result.</p>
+      <p>An entry <b>counts</b> for step 1 when it is your own, firsthand, and has a link anyone can open, such as a public repo, a demo or a post. Counted entries fill the season's slots. The rest wait under <b>Needs a link</b> until they have one.</p>
+    </div>
+    <div class="bench">
+      <div class="bench-head"><h3>Give an entry a link</h3><span class="caption">This season needs 3. Add a link and watch the entry move into a slot.</span></div>
+      <div class="slots" id="slots"></div>
+      <div class="entries" id="entries"></div>
+    </div>
+  </div>
+</section>
+
+<section id="seasons">
+  <div class="wrap">
+    <div class="stack prose">
+      <span class="eyebrow">7 · Seasons</span>
+      <h2>The plan runs 90 days at a time</h2>
+      <p>A <b>season</b> has its dates, a one-line goal, a target number and a <b>path</b>. Path A shows results you already have. Path B is a volume sprint for 30 days to earn them. You choose the path once a season, and you can keep ideas for seasons you haven't planned yet.</p>
+    </div>
+    <div class="bench">
+      <div class="bench-head"><h3>Where are you in the season?</h3><span class="caption" id="dayLabel"></span></div>
+      <input class="days" id="day" type="range" min="1" max="90" value="12" aria-label="Day of the season">
+      <div class="bands" id="bands"></div>
+    </div>
+  </div>
+</section>
+
+<section id="agents">
+  <div class="wrap">
+    <div class="stack prose">
+      <span class="eyebrow">8 · Your agents</span>
+      <h2>Each agent connects once, with your OK</h2>
+      <p>Everything you can do on the page is also a tool your agents can use over MCP. An agent asks to connect from a terminal, and you approve it on the <b>Connections</b> page, choosing whether it may only read or also change things. You can revoke it at any time.</p>
+      <p>Agents read <code>/skill.md</code> to learn how to use Brand. They read a brand before writing in its voice, suggest lines, add proof and save plan steps, and every change shows who made it.</p>
+    </div>
+    <figure class="fig">
+      <div class="fig-scroll">
+      <svg viewBox="0 0 900 100" style="min-width:600px" role="img" aria-label="An agent asks to connect, you approve it, and it gets a key for Brand's tools.">
+        <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="mk-mut"/></marker></defs>
+        <rect x="20" y="28" width="230" height="44" rx="8" class="s-an"/><text x="135" y="48" text-anchor="middle" class="tb">npm run connect</text><text x="135" y="64" text-anchor="middle" class="ts">the agent asks to connect</text>
+        <path d="M250 50 H326" class="ln-mut" marker-end="url(#a1)"/>
+        <rect x="330" y="28" width="230" height="44" rx="8" class="s-sunk"/><text x="445" y="48" text-anchor="middle" class="tb">You approve it</text><text x="445" y="64" text-anchor="middle" class="ts">read only, or read and change</text>
+        <path d="M560 50 H636" class="ln-mut" marker-end="url(#a1)"/>
+        <rect x="640" y="28" width="240" height="44" rx="8" class="s-pi"/><text x="760" y="48" text-anchor="middle" class="tb">It gets a key, shown once</text><text x="760" y="64" text-anchor="middle" class="ts">and uses Brand's tools</text>
+      </svg>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section id="run">
+  <div class="wrap">
+    <div class="stack prose">
+      <span class="eyebrow">9 · Running it</span>
+      <h2>One app, one data folder</h2>
+      <p>Brand runs on your own computer and answers only requests from it. All of its data lives in one folder, so backing it up means copying that folder. Git ignores the folder, and a check refuses any commit that contains data, so your brands never go into the code.</p>
+    </div>
+    <div class="two">
+<pre><span class="c"># install and start</span>
+npm install
 npm run build
-npm start</pre>
-  <p class="prose">It runs at <code>http://127.0.0.1:8093</code>. Set <code>PORT</code>, <code>HOST</code> and <code>DATA_DIR</code> to change the defaults. To bring brands over from Marketing, point the migration at a backup copy of its <code>data/pglite</code>:</p>
-  <pre>npm run migrate:marketing -- --from &lt;backup&gt;/data/pglite</pre>
+npm start      <span class="c"># http://127.0.0.1:8093</span>
+
+<span class="c"># bring brands over from a Marketing backup</span>
+npm run migrate:marketing -- --from &lt;backup&gt;/data/pglite</pre>
+      <div class="tablewrap"><table style="min-width:0">
+        <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td><code>PORT</code></td><td>Where the page and your agents reach Brand</td></tr>
+          <tr><td><code>DATA_DIR</code></td><td>Where all the data lives, <code>data</code> by default</td></tr>
+          <tr><td><code>KIT_CONNECT</code></td><td>Other apps to connect to at start</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
 </section>
 
-<footer>
-  Brand is built on <a href="https://github.com/jaetask/open-agent-kit">open-agent-kit</a> and <a href="https://github.com/jaetask/toolkit">@jaetask/toolkit</a>. The plan follows hoeem's method. MIT licence.
-</footer>
-</div>
+<section id="faq">
+  <div class="wrap">
+    <div class="stack prose">
+      <span class="eyebrow">10 · Questions</span>
+      <h2>Questions people ask</h2>
+      <p>The answers to what people ask most. Open any of them.</p>
+    </div>
+    <div id="faqs"></div>
+  </div>
+</section>
+
+<footer><div class="wrap">Brand is built on open-agent-kit. The plan follows hoeem's method. MIT licence.</div></footer>
+
+<script>
+(function () {
+"use strict";
+const $ = (s) => document.querySelector(s);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
+
+const WORDS = [
+  ["Brand", "One identity you build and maintain, such as yourself or a product. Everything else belongs to one brand."],
+  ["Profile", "Who a brand is: picture, name, tagline, colours, goals, how it sounds and where it posts."],
+  ["Line", "A short, quotable sentence that defines a brand's character, with its credit. Suggested, accepted or rejected."],
+  ["Plan", "hoeem's five steps a brand runs by: Proof, Your person, Association, Product and Belt."],
+  ["Step", "One of the plan's five parts. Done when every check passes, partial when some do."],
+  ["Proof", "Something a brand can show. It counts for step 1 when it is firsthand and has a link anyone can open."],
+  ["Season", "90 days of the plan, with its dates, goal, path and target."],
+  ["Path", "How a season earns proof: A shows results you have, B is a 30-day volume sprint."],
+  ["Belt", "Step 5: a public project with a promise, a target, a date and a weekly check-in."],
+  ["Channel", "Where a brand posts, such as X or a newsletter."],
+  ["Account", "A brand's account on a channel, with its persona."],
+  ["Peer", "Someone an account learns from and wants to contribute to."],
+  ["Connection", "An agent or app you approved, with what it may do. You can revoke it any time."],
+];
+function renderWords(q) {
+  const host = $("#gloss"); host.replaceChildren();
+  WORDS.filter((w) => !q || w.join(" ").toLowerCase().includes(q)).forEach(([t, d]) => {
+    const c = el("div", "term"); c.append(el("b", "", t), el("p", "", d)); host.append(c);
+  });
+  if (!host.children.length) host.append(el("p", "empty", "No word matches. Clear the filter to see all of them."));
+}
+$("#glossSearch").addEventListener("input", (e) => renderWords(e.target.value.trim().toLowerCase())); renderWords("");
+
+const STEPS = [
+  ["Proof", ["Path A or B chosen", "3 proof entries with a proof link"]],
+  ["Your person", ["Who", "Their pain", "What they pay for", "Growing market scored", "Acute pain scored", "Purchasing power scored", "Algorithmic clarity scored", "Intended audiences", "Audience promise"]],
+  ["Association", ["5 themes with a post idea", "3 things you stand against, with your standard", "2 or 3 visual constants", "Verbal style"]],
+  ["Product", ["A free product with its hook", "It delivers on its hook"]],
+  ["Belt", ["Project", "Exact promise", "Target number", "Launch date", "Where the deadline shows", "Delay plan", "Weekly check-in day"]],
+];
+const ticked = STEPS.map((s) => s[1].map(() => false));
+let step = 0;
+function stateOf(i) { const n = ticked[i].filter(Boolean).length; return n === 0 ? "empty" : n === ticked[i].length ? "done" : "partial"; }
+function renderSteps() {
+  const pick = $("#stepPick"); pick.replaceChildren();
+  STEPS.forEach(([name], i) => {
+    const b = el("button", "btn"); b.type = "button"; b.setAttribute("aria-pressed", String(i === step));
+    const top = el("span"); top.append(el("span", "dot " + stateOf(i)), document.createTextNode(`${i + 1} ${name}`));
+    const pct = Math.round((ticked[i].filter(Boolean).length / ticked[i].length) * 100);
+    b.append(top, el("small", "", stateOf(i) === "done" ? "done" : `${pct}%`));
+    b.addEventListener("click", () => { step = i; renderSteps(); });
+    pick.append(b);
+  });
+  const list = $("#stepChecks"); list.replaceChildren();
+  STEPS[step][1].forEach((label, j) => {
+    const l = el("label"); const c = el("input"); c.type = "checkbox"; c.checked = ticked[step][j];
+    c.addEventListener("change", () => { ticked[step][j] = c.checked; renderSteps(); });
+    l.append(c, el("b", "", label)); list.append(l);
+  });
+  const n = ticked[step].filter(Boolean).length, all = ticked[step].length;
+  const m = $("#stepMeter"); m.firstElementChild.style.width = `${Math.round((n / all) * 100)}%`; m.classList.toggle("full", n === all);
+  const st = stateOf(step);
+  $("#stepSay").textContent = st === "done" ? `${STEPS[step][0]} is done: all ${all} checks pass, and its dot turns green.` : st === "partial" ? `${STEPS[step][0]} is partial: ${n} of ${all} checks pass. The next one to do is "${STEPS[step][1][ticked[step].indexOf(false)]}".` : `${STEPS[step][0]} has not started. Tick a check to begin.`;
+}
+renderSteps();
+
+const ENTRIES = [
+  { title: "Shipped an open-source CLI", link: "github.com/example/cli" },
+  { title: "Wrote up what broke in production", link: "" },
+  { title: "Demo of the new editor", link: "" },
+  { title: "A thread on pricing mistakes", link: "" },
+];
+const NEEDED = 3;
+function renderProof() {
+  const counted = ENTRIES.filter((e) => e.link), waiting = ENTRIES.filter((e) => !e.link);
+  const slots = $("#slots"); slots.replaceChildren();
+  for (let i = 0; i < Math.max(NEEDED + 1, counted.length); i++) {
+    const e = counted[i];
+    if (e) { const s = el("div", "slot"); s.append(el("span", "ok", "Counts"), el("b", "", e.title), el("code", "", e.link)); slots.append(s); }
+    else if (i < NEEDED) slots.append(el("div", "slot need", `Needed ${i + 1} of ${NEEDED}`));
+    else slots.append(el("div", "slot spare", `Slot ${i + 1}`));
+  }
+  const list = $("#entries"); list.replaceChildren();
+  if (!waiting.length) list.append(el("p", "empty", "Nothing waiting for a link."));
+  waiting.forEach((e) => {
+    const r = el("div", "entryrow"); r.append(el("span", "", e.title));
+    const b = el("button", "btn", "Add link"); b.type = "button";
+    b.addEventListener("click", () => { e.link = "example.com/" + e.title.toLowerCase().split(" ").slice(0, 2).join("-"); renderProof(); });
+    r.append(el("span", "caption", "Needs a link"), b); list.append(r);
+  });
+}
+renderProof();
+
+const BANDS = [[1, 30, "Proof sprint", "Earn or gather the proof that fills step 1."], [31, 60, "Your person + Association", "Name who it is for, and what they will keep seeing."], [61, 90, "Product + Belt", "Ship the free thing and the public, dated project."]];
+function renderDay() {
+  const d = Number($("#day").value);
+  $("#dayLabel").textContent = `Day ${d} of 90 · ${90 - d} days to go`;
+  const host = $("#bands"); host.replaceChildren();
+  BANDS.forEach(([a, b, name, say]) => {
+    const c = el("div", d >= a && d <= b ? "now" : ""); c.append(el("b", "", name), el("span", "caption", `Days ${a}–${b}`), el("p", "", say)); host.append(c);
+  });
+}
+$("#day").addEventListener("input", renderDay); renderDay();
+
+const FAQ = [
+  ["Where does my data live?", "In the data folder on your computer: a database for your brands, plus anything you add, such as hoeem's diagrams. Git ignores it, and a check refuses any commit that contains data."],
+  ["Can an agent accept its own line?", "No. Agents can suggest lines. Only you accept or reject them."],
+  ["What happens to an old version of the plan?", "Every save is a new numbered version. Earlier versions are kept, so nothing you wrote is lost."],
+  ["Why doesn't my proof count?", "Proof counts when it is your own, firsthand, and has a link anyone can open. A quote or someone else's source never counts as your proof."],
+  ["Can I bring my brands over from the Marketing app?", "Yes. Point the migration at a backup copy of Marketing's data. It reads from a copy, never from the live database, and checks every count."],
+  ["How do I take a brand out of the sidebar?", "Hide it or archive it on the Brands page. Deleting is a separate step after archiving, and Brand writes a backup first."],
+];
+const host = $("#faqs");
+FAQ.forEach(([q, a], i) => { const d = el("details", "prob"); if (i === 0) d.open = true; const s = el("summary", "", q); const b = el("div", "body"); b.style.gridTemplateColumns = "minmax(0,1fr)"; b.append(el("div", "answer2", a)); d.append(s, b); host.append(d); });
+
+const links = [...document.querySelectorAll("nav.rail a")];
+const targets = links.map((a) => document.querySelector(a.getAttribute("href")));
+const spy = () => { let on = 0; targets.forEach((t, i) => { if (t && t.getBoundingClientRect().top < 120) on = i; }); links.forEach((a, i) => a.classList.toggle("on", i === on)); };
+window.addEventListener("scroll", spy, { passive: true }); spy();
+})();
+</script>
+
 </body>
 </html>

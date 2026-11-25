@@ -44,3 +44,33 @@ test("a fresh install creates a brand, saves a plan step and reads it back", asy
   );
   await pg.close();
 });
+
+test("a brand keeps its image frame: colours and fonts for every article image", async () => {
+  const pg = await PGlite.create();
+  await pg.exec(BRAND_SCHEMA);
+  bindDatabase(pg);
+  const owner = await getOwner();
+  const { id } = (await saveEntity({ name: "Kites", by: owner.id, requestId: "f1" } as never)) as {
+    id: string;
+  };
+  const plan = (await getPlan({ entityId: id })) as { entity: { version: number } };
+  const frame = {
+    background: "#abcdef",
+    ink: "#111111",
+    muted: "#555555",
+    font: "A Sans",
+    labelFont: "A Mono",
+  };
+  await savePlanLevel({
+    entityId: id,
+    expectedVersion: plan.entity.version,
+    level: "association",
+    values: { visual: { colours: [], typography: "", logos: [], frame } },
+    note: "",
+    by: owner.id,
+    requestId: "f2",
+  } as never);
+  const detail = await getEntityDetail(id);
+  assert.deepEqual(detail.guidance.visual.frame, frame);
+  await pg.close();
+});

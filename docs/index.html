@@ -65,20 +65,28 @@ footer{padding-block:40px 64px;color:var(--muted);font-size:.9rem;border-top:1px
   <h1>Define and maintain many brands in one place</h1>
   <p class="prose">Brand holds everything that makes a brand itself: who it is, what it believes, how it sounds and looks, and the plan it runs by. Your agents read the same brand over MCP, so every draft, page and post starts from it.</p>
   <nav class="toc" aria-label="On this page">
-    <a href="#brands">Brands</a><a href="#profile">Profile</a><a href="#lines">Lines</a><a href="#voice">Voice and look</a><a href="#plan">The plan</a><a href="#seasons">Seasons</a><a href="#agents">Agents</a><a href="#data">Your data</a><a href="#run">Run it</a>
+    <a href="#brands">Brands</a><a href="#profile">Profile</a><a href="#lines">Lines</a><a href="#plan">The plan</a><a href="#seasons">Seasons</a><a href="#agents">Agents</a><a href="#data">Your data</a><a href="#run">Run it</a>
   </nav>
 </header>
 
 <section id="brands" class="stack">
   <span class="eyebrow">Brands</span>
   <h2>One sidebar, every brand</h2>
-  <p class="prose">Each brand sits in the sidebar with its picture, or an icon and colour. Open one and its pages appear under it: Profile, What you believe, Voice and look, the plan's Overview and five steps, Seasons and History. All brands lists them in order, with arrows to move one up or down. Archive takes a brand out of the sidebar and keeps everything; Restore brings it back.</p>
+  <p class="prose">Each brand sits in the sidebar with its picture, or an icon and colour, and a dot that is orange until its plan reaches 100% and green after. Open one and it shows What you believe, then the plan for this season: the Overview and the five steps, each with its own dot. The Brands page adds a brand, hides one from the sidebar, archives it or, once archived, deletes it after a backup.</p>
 </section>
 
 <section id="profile" class="stack">
   <span class="eyebrow">Profile</span>
   <h2>Who you are, and where you post</h2>
-  <p class="prose">The profile holds the brand's name, picture, purpose, goals and intended audiences. Below it are the channels the brand posts on, the accounts on each channel with their persona, and the peers each account learns from.</p>
+  <p class="prose">Open the profile from the brand's row in the sidebar. Every panel has an Edit button that opens an edit page with Back, Cancel and Save.</p>
+  <div class="grid2">
+    <div class="card"><h3>Identity</h3><p>Picture, name, tagline, the brand's colours and its images.</p></div>
+    <div class="card"><h3>What you're aiming for</h3><p>The brand's goals.</p></div>
+    <div class="card"><h3>How you sound</h3><p>Key phrases, borrowed phrases with their credit, tone rules and an example in your own words.</p></div>
+    <div class="card"><h3>Who you look up to</h3><p>The peers each account wants to learn from and contribute to.</p></div>
+    <div class="card"><h3>Where you post</h3><p>Channels, the accounts on each, and each account's persona.</p></div>
+    <div class="card"><h3>Seasons</h3><p>This season and the next, with the season editor one click away.</p></div>
+  </div>
 </section>
 
 <section id="lines" class="stack">
@@ -86,18 +94,6 @@ footer{padding-block:40px 64px;color:var(--muted);font-size:.9rem;border-top:1px
   <h2>Lines that define your character</h2>
   <p class="prose">A line is a short, quotable sentence, with credit when the idea is someone else's, the thought behind it and the themes it supports. Agents suggest lines; only you accept, reject or retire them. Every change to a line is kept.</p>
   <div class="states"><span class="pill">suggested</span><span class="pill ok">accepted</span><span class="pill">rejected</span><span class="pill">retired</span></div>
-</section>
-
-<section id="voice" class="stack">
-  <span class="eyebrow">Voice and look</span>
-  <h2>How you sound, what you stand by, how you look</h2>
-  <div class="grid2">
-    <div class="card"><h3>Voice</h3><p>Key phrases, borrowed phrases with their credit, tone rules, an example in your words, and the verbal style.</p></div>
-    <div class="card"><h3>Audience promise</h3><p>What your audience can count on from you.</p></div>
-    <div class="card"><h3>Principles and conduct</h3><p>The rules every post keeps. A new brand starts with five.</p></div>
-    <div class="card"><h3>Look</h3><p>Colours, typography and logos, next to the visual constants from step 3.</p></div>
-  </div>
-  <p class="prose">Every save of voice, look or plan is a new numbered version. History lists them all.</p>
 </section>
 
 <section id="plan" class="stack">
@@ -112,7 +108,7 @@ footer{padding-block:40px 64px;color:var(--muted);font-size:.9rem;border-top:1px
     <li class="step"><span class="n">4</span><div><h3>Product</h3><p>Marketing says what you promise; the free thing proves it. Each free product has a hook, a link and release gates.</p><p class="done">Done when: a free product has its hook, and it delivers on it.</p></div></li>
     <li class="step"><span class="n">5</span><div><h3>Belt</h3><p>A public project with a result, a date and visible progress, so people come back every week.</p><p class="done">Done when: project, exact promise, target number, launch date, where the deadline shows, the delay plan and a weekly check-in day.</p></div></li>
   </ol>
-  <p class="prose">The Overview shows the season, today's day of 90, the goal, the path, all five steps and the next thing to do.</p>
+  <p class="prose">Each step opens with hoeem's line and a link to his guide, with his diagrams beside it when they are in <code>data/brand-plan-images</code>, then the "Done when" checks and the step's own panels. Every save of the plan is a new numbered version. The Overview shows the season, today's day of 90, the goal, the path, all five steps and the next thing to do.</p>
 </section>
 
 <section id="seasons" class="stack">
